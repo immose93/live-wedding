@@ -100,3 +100,10 @@ span {
 #register {
     left: 450px;
 }
+.home {
+    display: block;
+    margin: 0px auto;
+    position: relative;
+    top: 350px;
+    text-align: center;
+}
