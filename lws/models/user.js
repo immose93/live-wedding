@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes){
         },
         // 성별
         gender: {
-            type: DataTypes.STRING(1),
+            type: DataTypes.CHAR(1),
             allowNull: false
         },
         // 휴대전화
@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes){
             allowNull: false
         },
         // 가입일(YYYY-MM-DD)
-        createdAt: {
+        joinedAt: {
             type: DataTypes.DATE,
             allowNull: false
         }
