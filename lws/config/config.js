@@ -11,7 +11,8 @@ const development ={
   password: env.DEV_PASS,
   port: env.DEV_PORT,
   database: env.DEV_DB,
-  dialect: env.DEV_DIALECT
+  dialect: env.DEV_DIALECT,
+  //logQueryParameters: true
 };
 
 const test = {

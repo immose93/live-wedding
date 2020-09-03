@@ -17,14 +17,14 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.STRING(30),
             allowNull: false
         },
-        // 생일(YYYY-MM-DD)
+        // 생년월일(YYYY-MM-DD)
         birthday: {
             type: DataTypes.DATE,
             allowNull: false
         },
         // 성별
         gender: {
-            type: DataTypes.CHAR(1),
+            type: DataTypes.STRING(1),
             allowNull: false
         },
         // 휴대전화
@@ -35,11 +35,6 @@ module.exports = function(sequelize, DataTypes){
         // 이메일
         email: {
             type: DataTypes.STRING(320),
-            allowNull: false
-        },
-        // 가입일(YYYY-MM-DD)
-        joinedAt: {
-            type: DataTypes.DATE,
             allowNull: false
         }
     }, {
