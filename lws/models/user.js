@@ -3,19 +3,19 @@ module.exports = function(sequelize, DataTypes){
     let user = sequelize.define("User", {
         // ID
         user_id: {
-            type: DataTypes.STRING(30),
+            type: DataTypes.STRING,
             unique: true,
             allowNull: false,
             primaryKey: true
         },
         // 비밀번호
         password: {
-            type: DataTypes.STRING(30),
+            type: DataTypes.STRING,
             allowNull: false
         },
         // 이름
         name: {
-            type: DataTypes.STRING(30),
+            type: DataTypes.STRING,
             allowNull: false
         },
         // 생년월일(YYYY-MM-DD)
@@ -25,17 +25,17 @@ module.exports = function(sequelize, DataTypes){
         },
         // 성별
         gender: {
-            type: DataTypes.STRING(1),
+            type: DataTypes.STRING,
             allowNull: false
         },
         // 휴대전화
         phone: {
-            type: DataTypes.STRING(20),
+            type: DataTypes.STRING,
             allowNull: false
         },
         // 이메일
         email: {
-            type: DataTypes.STRING(320),
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 isEmail: true
