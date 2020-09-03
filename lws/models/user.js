@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes){
         user_id: {
             type: DataTypes.STRING(30),
             unique: true,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true
         },
         // 비밀번호
         password: {
@@ -35,7 +36,13 @@ module.exports = function(sequelize, DataTypes){
         // 이메일
         email: {
             type: DataTypes.STRING(320),
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        },
+        salt: {
+            type: DataTypes.STRING
         }
     }, {
         underscored: true,
