@@ -17,9 +17,9 @@
                     <img src="/images/tw.png" alt="twitter">
                     <img src="/images/gl.png" alt="google">
                 </div>
-                <form id="login" action="/auth/login" class="input-group">
-                    <input type="text" class="input-field" placeholder="ID 입력" required>
-                    <input type="password" class="input-field" placeholder="Password 입력" required>
+                <form id="login" action="/auth/login" class="input-group" method="POST">
+                    <input type="text" name="id" class="input-field" placeholder="ID 입력" required>
+                    <input type="password" name="password" class="input-field" placeholder="Password 입력" required>
                     <input type="checkbox" class="checkbox"><span>Remember Password</span>
                     <button class="submit">로그인</button>
                 </form>

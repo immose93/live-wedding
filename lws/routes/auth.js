@@ -15,8 +15,7 @@ router.post('/signup', function(req, res, next) {
   let inputPW = body.pw;
   let salt = Math.round((new Date().valueOf()*Math.random()))+"";
   let hashPW = crypto.createHash("sha512").update(inputPW+salt).digest("hex");
-
-  console.log(`id: ${body.id}`);
+  
   // DB에 등록
   models.User.create({
     user_id: body.id,
@@ -36,6 +35,31 @@ router.post('/signup', function(req, res, next) {
     console.log("데이터 추가 실패");
     res.send("회원가입 실패. 관리자에게 문의하세요.");
   });
+});
+
+// 로그인
+router.post('/login', async function(req, res, next) {
+  let body = req.body;
+
+  let result = await models.User.findOne({
+    where: {
+      user_id: body.id
+    }
+  });
+  // 비밀번호 검사
+  let dbPW = result.dataValues.password;
+  let inputPW = body.password;
+  let salt = result.dataValues.salt;
+  let hashPW = crypto.createHash("sha512").update(inputPW+salt).digest("hex");
+
+  if(dbPW === hashPW){
+    console.log(`${body.id} 로그인`);
+    res.redirect("/user");
+  }
+  else {
+    console.log("비밀번호 불일치");
+    res.redirect("/auth");
+  }
 });
 
 module.exports = router;

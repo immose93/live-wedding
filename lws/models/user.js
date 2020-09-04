@@ -41,6 +41,7 @@ module.exports = function(sequelize, DataTypes){
                 isEmail: true
             }
         },
+        // 암호화를 위한 salt 키
         salt: {
             type: DataTypes.STRING
         }
