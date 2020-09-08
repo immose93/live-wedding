@@ -2673,7 +2673,7 @@ input, select, textarea {
 		.button.primary {
 			background-color: #ffffff;
 			box-shadow: none;
-			color: #242943;
+			color: rgba(211, 71, 125, 0.9);
 		}
 
 			input[type="submit"].primary:hover, input[type="submit"].primary:active,
@@ -3114,7 +3114,7 @@ input, select, textarea {
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		background-color: #2a2f4a;
+		background-color: rgba(211, 71, 125, 0.2);
 		box-shadow: 0 0 0.25em 0 rgba(0, 0, 0, 0.15);
 		cursor: default;
 		font-weight: 600;
@@ -3404,13 +3404,13 @@ input, select, textarea {
 			-moz-transition: opacity 2.5s ease;
 			-webkit-transition: opacity 2.5s ease;
 			-ms-transition: opacity 2.5s ease;
-			transition: opacity 2.5s ease;
+			transition: opacity 2s ease;
 			-moz-transition-delay: 0.75s;
 			-webkit-transition-delay: 0.75s;
 			-ms-transition-delay: 0.75s;
-			transition-delay: 0.75s;
+			transition-delay: 0.2s;
 			pointer-events: none;
-			background-color: #ff74ba;
+			background-color: #fd98cb;
 			content: '';
 			display: block;
 			height: 100%;
@@ -3589,7 +3589,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		background-color: #2a2f4a;
+		background-color: #e69dc1;
 	}
 
 		#main > * {
@@ -3798,7 +3798,7 @@ input, select, textarea {
 		-ms-justify-content: center;
 		justify-content: center;
 		pointer-events: none;
-		background: rgba(36, 41, 67, 0.9);
+		background: rgba(211, 71, 125, 0.6);
 		box-shadow: none;
 		height: 100%;
 		left: 0;

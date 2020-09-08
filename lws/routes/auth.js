@@ -38,6 +38,7 @@ router.post('/signup', function(req, res, next) {
 });
 
 // 로그인
+/*
 router.post('/login', async function(req, res, next) {
   let body = req.body;
 
@@ -54,12 +55,19 @@ router.post('/login', async function(req, res, next) {
 
   if(dbPW === hashPW){
     console.log(`${body.id} 로그인`);
-    res.redirect("/user");
+    req.session.id = body.id;
+    res.redirect("/");
   }
   else {
     console.log("비밀번호 불일치");
     res.redirect("/auth");
   }
 });
+ */
+router.get("/logout", function(req,res,next){
+  req.session.destroy();
+  res.clearCookie();
+  res.redirect("/");
+})
 
 module.exports = router;

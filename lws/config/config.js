@@ -12,7 +12,7 @@ const development ={
   port: env.DEV_PORT,
   database: env.DEV_DB,
   dialect: env.DEV_DIALECT,
-  //logQueryParameters: true
+  logQueryParameters: true
 };
 
 const test = {

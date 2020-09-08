@@ -8,13 +8,16 @@
 		<noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-
 		<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Header -->
 					<header id="header" class="alt">
 						<a href="/" class="logo"><strong>Live Wedding Service</strong> <span>by Moses</span></a>
+						<% if(typeof session.passport.user != 'undefined') {%> 
+							|
+							<a href="/user/mypage/<%=session.passport.user%>" class="logo"><span><%=session.passport.user%>님</span></a>
+						<% } %> 
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -23,13 +26,19 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<ul class="links">
+							<li><a href="/user/mypage/<%=session.passport.user%>"><%=session.passport.user%></a></li>
 							<li><a href="/">홈</a></li>
-							<li><a href="landing.html">서비스 소개</a></li>
-							<li><a href="generic.html">제작자</a></li>
+							<li><a href="/service/introduce">서비스 소개</a></li>
+							<li><a href="/introduce/developer">제작자</a></li>
 						</ul>
 						<ul class="actions stacked">
-							<li><a href="#" class="button primary fit">서비스 시작하기</a></li>
-							<li><a href="/auth" class="button fit">로그인</a></li>
+							<% if(typeof session.passport.user === 'undefined') {%> 
+								<li><a href="/auth" class="button primary fit">마이 페이지</a></li>
+								<li><a href="/auth" class="button fit">로그인</a></li>
+							<% } else { %> 
+								<li><a href="/user/mypage" class="button primary fit">마이 페이지</a></li>
+								<li><a href="/auth/logout" class="button fit">로그아웃</a></li>
+							<% } %> 
 						</ul>
 					</nav>
 
@@ -58,8 +67,8 @@
 										<img src="images/pic01.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">Aliquam</a></h3>
-										<p>Ipsum dolor sit amet</p>
+										<h3><a href="/service/apply" class="link">서비스 신청</a></h3>
+										<p>결혼식 서비스 생중계 서비스를 신청합니다.</p>
 									</header>
 								</article>
 								<article>
@@ -67,8 +76,8 @@
 										<img src="images/pic02.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">Tempus</a></h3>
-										<p>feugiat amet tempus</p>
+										<h3><a href="landing.html" class="link">서비스 관리</a></h3>
+										<p>신청한 서비스를 관리합니다.</p>
 									</header>
 								</article>
 								<article>
@@ -89,24 +98,6 @@
 										<p>Nisl sed aliquam</p>
 									</header>
 								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic05.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="landing.html" class="link">Consequat</a></h3>
-										<p>Ipsum dolor sit amet</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic06.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="landing.html" class="link">Etiam</a></h3>
-										<p>Feugiat amet tempus</p>
-									</header>
-								</article>
 							</section>
 
 						<!-- Two -->
@@ -121,7 +112,6 @@
 									</ul>
 								</div>
 							</section>
-
 					</div>
 
 				<!-- Contact -->
