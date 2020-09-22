@@ -5,9 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var flash = require('connect-flash');
 var Sequelize = require('sequelize');
-var crypto = require('crypto');
 
 var app = express();
 
@@ -34,7 +32,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 // 세션 설정
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/config/config.js')[env];
+const config = require(__dirname + '/config/config.js')[env]; // DB 관련 정보를 config 파일에서 불러옴
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
 var myStore = new SequelizeStore({
   db: sequelize,
@@ -50,80 +48,13 @@ app.use(session({
 }));
 myStore.sync();
 
-// passport (세션 설정 이후에 위치해야 함)
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy; // local 전략 사용
-
-app.use(passport.initialize()); // 세션 초기화
-app.use(passport.session());  // 세션 사용
-app.use(flash()); // 플래시 사용
-
-// 사용자의 식별자를 세션 스토어에 저장
-passport.serializeUser(function(user,done){
-  done(null, user.user_id);
-});
-// 사용자의 식별자로 데이터를 조회할 때 사용
-passport.deserializeUser(async function(id,done){
-  var userData = await models.User.findOne({
-    where: {
-      user_id: id
-    }
-  });
-  done(null, userData.dataValues);
-});
-
-passport.use(new LocalStrategy(
-  {
-    usernameField: 'id' // username으로 id를 받음
-  },
-  async function(username, password, done) { // local 전략으로 인증요청이 들어오면 이 콜백함수를 수행
-    let result = await models.User.findOne({
-      where: {
-        user_id: username
-      }
-    });
-    // 비밀번호 검사
-    let dbPW = result.dataValues.password;
-    let salt = result.dataValues.salt;
-    let hashPW = crypto.createHash("sha512").update(password+salt).digest("hex");
-  
-    if(dbPW === hashPW){
-      console.log(`${username} 로그인`);
-      return done(null, result.dataValues);
-    }
-    else if(result === null){
-      return done(null, false, {
-        message: '존재하지 않는 ID입니다.'
-      })
-    }
-    else {
-      return done(null, false, {
-        message: '비밀번호가 틀렸습니다.'
-      })
-    }
-  }
-));
-
-app.post('/auth/login', 
-  passport.authenticate('local', 
-  { 
-    successRedirect: '/',
-    failureRedirect: '/auth/login',
-    failureFlash: true
-  })
-);
-
-app.get('/auth/logout', function(req, res) {
-  req.logout();
-  req.session.save(function(){
-    res.redirect('/');
-  });
-});
+// passport 설정 (세션 설정 이후에 위치해야 함)
+var passport = require('./lib/passport_set')(app, models);
 
 // 라우터
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
+var authRouter = require('./routes/auth')(passport);
 var serviceRouter = require('./routes/service')(session);
 
 app.use('/', indexRouter);

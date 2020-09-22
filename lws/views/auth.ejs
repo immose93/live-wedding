@@ -3,6 +3,12 @@
         <meta charset="utf-8" />
         <title>로그인</title>
         <link rel="stylesheet" href="/stylesheets/auth_style.css">
+        <script type="text/javascript">
+            var error = '<%- JSON.stringify(msg) %>';
+            if(error != '""'){
+                alert(error);
+            }
+        </script>
     </head>
     <body>
         <div class="wrap">

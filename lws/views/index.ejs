@@ -8,13 +8,23 @@
 		<noscript><link rel="stylesheet" href="/stylesheets/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
+		<%# login 여부 체크 %> 
+		<% var login = false;
+		if("passport" in session){
+			if("user" in session.passport){
+				login = true;
+			}
+			else {
+				login = false;
+			}
+		} %> 
 		<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Header -->
 					<header id="header" class="alt">
 						<a href="/" class="logo"><strong>Live Wedding Service</strong> <span>by Moses</span></a>
-						<% if(typeof session.passport.user != 'undefined') {%> 
+						<% if(login) {%> 
 							|
 							<a href="/user/mypage/<%=session.passport.user%>" class="logo"><span><%=session.passport.user%>님</span></a>
 						<% } %> 
@@ -26,13 +36,15 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<ul class="links">
+							<% if(login) { %>
 							<li><a href="/user/mypage/<%=session.passport.user%>"><%=session.passport.user%></a></li>
+							<% } %> 
 							<li><a href="/">홈</a></li>
 							<li><a href="/service/introduce">서비스 소개</a></li>
 							<li><a href="/introduce/developer">제작자</a></li>
 						</ul>
 						<ul class="actions stacked">
-							<% if(typeof session.passport.user === 'undefined') {%> 
+							<% if(!login) {%> 
 								<li><a href="/auth" class="button primary fit">마이 페이지</a></li>
 								<li><a href="/auth" class="button fit">로그인</a></li>
 							<% } else { %> 
