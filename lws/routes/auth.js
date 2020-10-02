@@ -9,7 +9,7 @@ module.exports = function(passport) {
     var fmsg = req.flash();
     var feedback = '';
     console.log(fmsg);
-    if(error in fmsg){
+    if(typeof fmsg.error != "undefined"){
       feedback = fmsg.error[0];
     }
     console.log('feedback : '+ feedback);
@@ -49,7 +49,7 @@ module.exports = function(passport) {
     passport.authenticate('local', 
     { 
       successRedirect: '/auth/login_success',
-      failureRedirect: '/auth/login_faliure',
+      failureRedirect: '/auth/login_failure',
       failureFlash: true
     })
   );
