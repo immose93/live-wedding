@@ -7,12 +7,12 @@ module.exports = function (session){
             res.redirect('/auth');
         }
         else {
-            res.render('./service/apply');
+            res.render('service_apply');
         }
     });
 
     router.get('/introduce', function(req, res, next) {
-        res.render('./service/introduce');
+        res.render('service_introduce');
     });
 
     return router;
